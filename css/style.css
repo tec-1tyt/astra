@@ -134,25 +134,16 @@ button{background:none;border:0;cursor:pointer}
 .btn--solid::before{background:var(--bone)}
 .btn--solid:hover{border-color:var(--bone)}
 
-/* ═══════════ KURZOR (morfující blob) ═══════════ */
-.cursor{
-  position:fixed;left:0;top:0;z-index:900;pointer-events:none;
-  width:16px;height:16px;margin:-8px 0 0 -8px;
-  background:var(--amber);opacity:0;
-  border-radius:58% 42% 47% 53%/44% 51% 49% 56%;
-  animation:blob 7s var(--e2) infinite;
-  transition:width .45s var(--e),height .45s var(--e),margin .45s var(--e),
-             opacity .3s linear,background .35s linear;
-  mix-blend-mode:difference;
+/* ═══════════ PŘEPÍNAČ JAZYKŮ ═══════════ */
+.lang{display:flex;align-items:center;gap:2px;flex:none}
+.lang button{
+  padding:.5em .62em;font-size:.68rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--txt-l-2);border-radius:2px;line-height:1;
+  transition:color .35s var(--e),background .35s var(--e),border-radius .35s var(--e);
 }
-.cursor.on{opacity:1}
-.cursor.big{width:104px;height:104px;margin:-52px 0 0 -52px;background:var(--bone)}
-.cursor__label{
-  position:absolute;inset:0;display:grid;place-items:center;
-  font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink);
-  opacity:0;transition:opacity .3s;mix-blend-mode:normal;
-}
-.cursor.big .cursor__label{opacity:1}
+.lang button:hover{color:var(--txt-l)}
+.lang button[aria-current="true"]{color:var(--ink);background:var(--amber)}
+
 @keyframes blob{
   0%,100%{border-radius:58% 42% 47% 53%/44% 51% 49% 56%}
   33%    {border-radius:38% 62% 63% 37%/58% 39% 61% 42%}
@@ -221,8 +212,12 @@ button{background:none;border:0;cursor:pointer}
     linear-gradient(180deg,rgba(14,14,15,.72) 0%,rgba(14,14,15,.12) 34%,rgba(14,14,15,.5) 68%,rgba(14,14,15,.94) 100%),
     linear-gradient(90deg,rgba(27,50,67,.42) 0%,transparent 62%);
 }
-.hero__in{max-width:var(--max);margin-inline:auto;width:100%;padding:0 var(--pad) clamp(46px,7vw,88px);color:var(--txt-l)}
-.hero__h1{margin:clamp(20px,2.6vw,34px) 0 0;max-width:16ch}
+/* Horní odsazení musí odpovídat výšce fixní navigace — jinak se
+   delší nadpis (UA/RU/DE) vysune nahoru a podleze pod menu. */
+.hero__in{max-width:var(--max);margin-inline:auto;width:100%;
+  padding:clamp(92px,11vh,140px) var(--pad) clamp(46px,7vw,88px);color:var(--txt-l)}
+.hero__h1{margin:clamp(20px,2.6vw,34px) 0 0;max-width:16ch;
+  overflow-wrap:break-word;hyphens:auto}
 .rise{display:block;overflow:hidden}
 .rise>span{display:block;transform:translateY(105%);transition:transform 1.25s var(--e)}
 .hero.go .rise>span{transform:none}
@@ -424,6 +419,9 @@ button{background:none;border:0;cursor:pointer}
 .lb{position:fixed;inset:0;z-index:800;background:rgba(14,14,15,.965);
   display:grid;place-items:center;padding:clamp(20px,5vw,70px);
   opacity:0;transition:opacity .4s var(--e)}
+/* POZOR: display:grid vyse prebije atribut [hidden]. Bez tohoto radku
+   visi neviditelny overlay pres celou stranku a polyka vsechny kliky. */
+.lb[hidden]{display:none}
 .lb.on{opacity:1}
 .lb__fig{max-width:min(1200px,100%);max-height:100%;display:flex;flex-direction:column;gap:16px}
 .lb__fig img{max-height:78vh;width:auto;object-fit:contain;
@@ -455,17 +453,42 @@ body.lock{overflow:hidden}
   .gal__i:nth-child(n){grid-column:span 6;margin-top:0;aspect-ratio:4/3}
   .gal__i:nth-child(1),.gal__i:nth-child(6){aspect-ratio:3/4}
 }
-@media (max-width:760px){
+/* Navigace se sklápí dřív než zbytek — se čtyřmi jazyky
+   a delšími německými popisky se vodorovné menu nevejde. */
+@media (max-width:1000px){
   .nav__links{
     position:fixed;inset:0 0 auto;top:0;padding:96px var(--pad) 40px;
     background:rgba(14,14,15,.97);backdrop-filter:blur(20px);
     flex-direction:column;gap:22px;
     clip-path:inset(0 0 100% 0);transition:clip-path .7s var(--e);
+    pointer-events:none;
   }
-  .nav__links.open{clip-path:inset(0 0 0 0)}
+  .nav__links.open{clip-path:inset(0 0 0 0);pointer-events:auto}
   .nav__links .mlink{font-size:1.05rem;letter-spacing:.06em}
   .nav__cta{display:none}
   .burger{display:block;z-index:2}
+  .nav__in{gap:14px}
+  /* jazyky musí zůstat dosažitelné i s otevřeným menu */
+  .lang{position:relative;z-index:2}
+  .lang button{padding:.5em .48em;font-size:.64rem;letter-spacing:.06em}
+}
+@media (max-width:400px){
+  .brand__txt{font-size:.82rem;letter-spacing:.08em}
+  .lang button{padding:.5em .36em;font-size:.6rem;letter-spacing:.02em}
+}
+
+@media (max-width:760px){
+  /* Dvanáctisloupcová mřížka se pod ~440 px rozpadne: 11 mezer je
+     širších než kontejner, sloupce spadnou na nulu a obsah přeteče
+     (schované pod overflow:hidden). Na mobilu proto jeden sloupec. */
+  .about__grid,.cta__grid,.svc__item,.gal{grid-template-columns:1fr}
+  .about__head,.about__fig,.about__txt,
+  .cta__left,.form,
+  .svc__fig,.svc__body,
+  .svc__item--rev .svc__fig,.svc__item--rev .svc__body,
+  .gal__i:nth-child(n){grid-column:auto;grid-row:auto}
+  .cta__grid{gap:clamp(40px,8vw,60px)}
+
   .stats{grid-template-columns:repeat(2,1fr)}
   .stat{border-bottom:1px solid var(--line-d);padding-bottom:clamp(20px,3vw,30px)}
   .stat:nth-child(2n){border-right:0}
@@ -474,7 +497,7 @@ body.lock{overflow:hidden}
   .refs__grid{grid-template-columns:1fr}
   .ref:nth-child(n){margin-top:0}
   .f-row{grid-template-columns:1fr}
-  .gal__i:nth-child(n){grid-column:1/13;aspect-ratio:4/3}
+  .gal__i:nth-child(n){aspect-ratio:4/3;margin-top:0}
   .cta__contacts li{grid-template-columns:1fr;gap:6px}
   .foot__top{grid-template-columns:1fr}
   .foot__brand{grid-column:auto}
@@ -492,5 +515,4 @@ body.lock{overflow:hidden}
   [data-morph] img{transform:none}
   .rise>span{transform:none}
   .hero__sub,.hero__in .btn,.gal__i figcaption{opacity:1;transform:none}
-  .cursor{display:none}
 }

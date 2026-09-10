@@ -8,14 +8,72 @@
      FORM_ENDPOINT: URL služby, která přijme poptávku
      (např. Formspree: "https://formspree.io/f/xxxxxxx").
      Když zůstane prázdné, formulář otevře e-mailového klienta
-     s předvyplněnou zprávou na FORM_EMAIL.                    */
+     s předvyplněnou zprávou na FORM_EMAIL.
+     DEFAULT_LANG: 'cs' | 'uk' | 'ru' | 'de'                   */
   var FORM_ENDPOINT = '';
   var FORM_EMAIL = 'info@avismetal.cz';
+  var DEFAULT_LANG = 'cs';
   /* ──────────────────────────────────────────────────────── */
 
   var $ = function (s, c) { return (c || document).querySelector(s); };
   var $$ = function (s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
   var calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ═══════════ JAZYKY ═══════════ */
+  var DICT = window.I18N || {};
+  var lang = DEFAULT_LANG;
+  try {
+    var saved = localStorage.getItem('avis.lang');
+    if (saved && DICT[saved]) lang = saved;
+  } catch (e) { /* privátní režim */ }
+
+  var t = function (key) {
+    var d = DICT[lang] || DICT[DEFAULT_LANG] || {};
+    if (d[key] != null) return d[key];
+    var f = DICT[DEFAULT_LANG] || {};
+    return f[key] != null ? f[key] : '';
+  };
+
+  var applyLang = function (l) {
+    if (!DICT[l]) return;
+    lang = l;
+    document.documentElement.lang = l;
+
+    $$('[data-i18n]').forEach(function (el) {
+      var v = t(el.getAttribute('data-i18n'));
+      if (v === '') return;
+      el.textContent = v;
+      // morfující odkazy berou viditelný text z atributu data-t
+      if (el.hasAttribute('data-t')) el.setAttribute('data-t', v);
+    });
+    $$('[data-i18n-html]').forEach(function (el) {
+      var v = t(el.getAttribute('data-i18n-html'));
+      if (v !== '') el.innerHTML = v;
+    });
+    $$('[data-i18n-ph]').forEach(function (el) {
+      var v = t(el.getAttribute('data-i18n-ph'));
+      if (v !== '') el.setAttribute('placeholder', v);
+    });
+    $$('[data-i18n-cap]').forEach(function (el) {
+      var v = t(el.getAttribute('data-i18n-cap'));
+      if (v !== '') el.setAttribute('data-cap', v);
+    });
+
+    document.title = t('meta.title');
+    var md = $('#metaDesc');
+    if (md) md.setAttribute('content', t('meta.desc'));
+
+    $$('#lang button').forEach(function (b) {
+      b.setAttribute('aria-current', String(b.getAttribute('data-lang') === l));
+    });
+
+    try { localStorage.setItem('avis.lang', l); } catch (e) { /* ignore */ }
+  };
+
+  $$('#lang button').forEach(function (b) {
+    b.addEventListener('click', function () { applyLang(b.getAttribute('data-lang')); });
+  });
+  applyLang(lang);
 
   /* ─── rok v patičce ─── */
   var yr = $('#yr');
@@ -27,9 +85,7 @@
 
   /* ─── navigace: stav při scrollu ─── */
   var nav = $('#nav');
-  var onScroll = function () {
-    nav.classList.toggle('nav--solid', window.scrollY > 40);
-  };
+  var onScroll = function () { nav.classList.toggle('nav--solid', window.scrollY > 40); };
   onScroll();
   window.addEventListener('scroll', onScroll, { passive: true });
 
@@ -59,8 +115,7 @@
       });
     }, { rootMargin: '0px 0px -12% 0px', threshold: 0.12 });
 
-    targets.forEach(function (el, i) {
-      // jemné prostřídání uvnitř jedné mřížky
+    targets.forEach(function (el) {
       var sib = el.parentElement ? Array.prototype.indexOf.call(el.parentElement.children, el) : 0;
       el.style.transitionDelay = Math.min(sib, 5) * 70 + 'ms';
       io.observe(el);
@@ -77,11 +132,11 @@
         if (!e.isIntersecting) return;
         var el = e.target;
         cio.unobserve(el);
-        var to = parseInt(el.dataset.count, 10) || 0;
-        var suf = el.dataset.suffix || '';
+        var to = parseInt(el.getAttribute('data-count'), 10) || 0;
+        var suf = el.getAttribute('data-suffix') || '';
         var t0 = performance.now();
-        var step = function (t) {
-          var p = Math.min((t - t0) / 1400, 1);
+        var step = function (now) {
+          var p = Math.min((now - t0) / 1400, 1);
           var eased = 1 - Math.pow(1 - p, 4);
           el.textContent = Math.round(to * eased) + (p === 1 ? suf : '');
           if (p < 1) requestAnimationFrame(step);
@@ -91,7 +146,9 @@
     }, { threshold: 0.6 });
     counters.forEach(function (c) { cio.observe(c); });
   } else {
-    counters.forEach(function (c) { c.textContent = c.dataset.count + (c.dataset.suffix || ''); });
+    counters.forEach(function (c) {
+      c.textContent = c.getAttribute('data-count') + (c.getAttribute('data-suffix') || '');
+    });
   }
 
   /* ─── parallax hero ─── */
@@ -109,35 +166,6 @@
     }, { passive: true });
   }
 
-  /* ─── morfující kurzor ─── */
-  var cur = $('#cursor');
-  var fine = window.matchMedia('(hover:hover) and (pointer:fine)').matches;
-  if (cur && fine && !calm) {
-    var cx = 0, cy = 0, tx = 0, ty = 0, label = $('.cursor__label', cur);
-
-    document.addEventListener('mousemove', function (e) {
-      tx = e.clientX; ty = e.clientY;
-      cur.classList.add('on');
-    }, { passive: true });
-    document.addEventListener('mouseleave', function () { cur.classList.remove('on'); });
-
-    (function loop() {
-      cx += (tx - cx) * 0.16;
-      cy += (ty - cy) * 0.16;
-      cur.style.transform = 'translate3d(' + cx + 'px,' + cy + 'px,0)';
-      requestAnimationFrame(loop);
-    })();
-
-    $$('.gal__i').forEach(function (el) {
-      el.addEventListener('mouseenter', function () { cur.classList.add('big'); label.textContent = 'zvětšit'; });
-      el.addEventListener('mouseleave', function () { cur.classList.remove('big'); label.textContent = ''; });
-    });
-    $$('a, button, .chips li').forEach(function (el) {
-      el.addEventListener('mouseenter', function () { cur.classList.add('big'); label.textContent = ''; });
-      el.addEventListener('mouseleave', function () { cur.classList.remove('big'); });
-    });
-  }
-
   /* ─── lightbox galerie ─── */
   var lb = $('#lb'), lbImg = $('#lbImg'), lbCap = $('#lbCap');
   var shots = $$('.gal__i');
@@ -148,8 +176,8 @@
     var fig = shots[idx];
     var img = $('img', fig);
     lbImg.src = img.src;
-    lbImg.alt = img.alt;
-    lbCap.textContent = fig.dataset.cap || img.alt;
+    lbImg.alt = img.alt || '';
+    lbCap.textContent = fig.getAttribute('data-cap') || '';
   };
   var openLb = function (i) {
     show(i);
@@ -197,24 +225,18 @@
 
   var check = function (input) {
     var v = (input.value || '').trim();
-    if (input.name === 'jmeno') {
-      if (v.length < 2) return 'Vyplňte prosím jméno.';
-    }
-    if (input.name === 'telefon') {
-      if (v.replace(/[^\d]/g, '').length < 9) return 'Zadejte platné telefonní číslo.';
-    }
-    if (input.name === 'email' && v) {
-      if (!/^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i.test(v)) return 'Zkontrolujte tvar e-mailu.';
-    }
-    if (input.name === 'gdpr' && !input.checked) {
-      return 'Bez souhlasu nemůžeme poptávku zpracovat.';
-    }
+    if (input.name === 'jmeno' && v.length < 2) return t('err.name');
+    if (input.name === 'telefon' && v.replace(/[^\d]/g, '').length < 9) return t('err.tel');
+    if (input.name === 'email' && v && !/^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i.test(v)) return t('err.mail');
+    if (input.name === 'gdpr' && !input.checked) return t('err.gdpr');
     return '';
   };
 
   $$('input, textarea', form).forEach(function (input) {
     input.addEventListener('blur', function () { setErr(input, check(input)); });
-    input.addEventListener('input', function () { if (fieldOf(input).classList.contains('bad')) setErr(input, check(input)); });
+    input.addEventListener('input', function () {
+      if (fieldOf(input).classList.contains('bad')) setErr(input, check(input));
+    });
   });
 
   form.addEventListener('submit', function (e) {
@@ -222,14 +244,13 @@
     msg.textContent = '';
     msg.classList.remove('ok');
 
-    var required = $$('[required]', form);
     var bad = null;
-    required.forEach(function (input) {
+    $$('[required]', form).forEach(function (input) {
       var err = check(input);
       setErr(input, err);
       if (err && !bad) bad = input;
     });
-    if (bad) { bad.focus(); msg.textContent = 'Zkontrolujte prosím označená pole.'; return; }
+    if (bad) { bad.focus(); msg.textContent = t('err.check'); return; }
 
     var data = new FormData(form);
     var btn = $('button[type=submit]', form);
@@ -246,25 +267,23 @@
         .then(function (r) {
           if (!r.ok) throw new Error(r.status);
           form.reset();
-          done('Děkujeme. Ozveme se do 24 hodin.', true);
+          done(t('ok.sent'), true);
         })
-        .catch(function () {
-          done('Odeslání se nepodařilo. Zavolejte nám prosím přímo.');
-        });
+        .catch(function () { done(t('err.send')); });
     } else {
       // fallback bez serveru — otevře e-mailového klienta
       var body = [
-        'Jméno: ' + data.get('jmeno'),
-        'Telefon: ' + data.get('telefon'),
-        'E-mail: ' + (data.get('email') || '—'),
-        'Služba: ' + (data.get('sluzba') || '—'),
+        t('f.name') + ' ' + data.get('jmeno'),
+        t('f.tel') + ' ' + data.get('telefon'),
+        t('f.mail') + ' ' + (data.get('email') || '—'),
+        t('f.svc') + ' ' + (data.get('sluzba') || '—'),
         '',
         data.get('zprava') || ''
       ].join('\n');
       window.location.href = 'mailto:' + FORM_EMAIL +
-        '?subject=' + encodeURIComponent('Poptávka z webu — ' + data.get('jmeno')) +
+        '?subject=' + encodeURIComponent(t('mail.subject') + ' — ' + data.get('jmeno')) +
         '&body=' + encodeURIComponent(body);
-      done('Otevřeli jsme váš e-mailový klient s předvyplněnou poptávkou.', true);
+      done(t('ok.mail'), true);
     }
   });
 
