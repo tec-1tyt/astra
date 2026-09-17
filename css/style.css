@@ -433,7 +433,10 @@ button{background:none;border:0;cursor:pointer}
   clip-path:inset(6% round 30px);transition:clip-path .8s var(--e)}
 .lb.on .lb__fig img{clip-path:inset(0 round 3px)}
 .lb__fig figcaption{color:var(--txt-l-2);font-size:.76rem;letter-spacing:.13em;text-transform:uppercase;text-align:center}
-.lb__x,.lb__nav{position:absolute;color:var(--txt-l);width:52px;height:52px;
+/* z-index je nutny: bez nej figure/img (pozdejsi v DOM) na uzkych
+   obrazovkach prekryva sipky, protoze fotka tam zabira skoro celou
+   sirku a fyzicky sedi nad tlacitky ve stejne vrstve razeni. */
+.lb__x,.lb__nav{position:absolute;z-index:2;color:var(--txt-l);width:52px;height:52px;
   display:grid;place-items:center;font-size:1.4rem;border:1px solid var(--line-l);border-radius:2px;
   transition:background .4s var(--e),color .4s var(--e),border-radius .4s var(--e)}
 .lb__x:hover,.lb__nav:hover{background:var(--amber);color:var(--ink);border-color:var(--amber);border-radius:50%}
