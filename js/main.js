@@ -11,7 +11,7 @@
      s předvyplněnou zprávou na FORM_EMAIL.
      DEFAULT_LANG: 'cs' | 'uk' | 'ru' | 'de'                   */
   var FORM_ENDPOINT = '';
-  var FORM_EMAIL = 'info@avismetal.cz';
+  var FORM_EMAIL = 'AVIS-METAL@seznam.cz';
   var DEFAULT_LANG = 'cs';
   /* ──────────────────────────────────────────────────────── */
 

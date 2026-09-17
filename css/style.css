@@ -297,8 +297,14 @@ button{background:none;border:0;cursor:pointer}
 
 /* ═══════════ CITÁT ═══════════ */
 .quote-band{background:var(--steel);color:var(--txt-l);padding:clamp(64px,8vw,120px) 0}
-.quote{position:relative;max-width:26ch;margin-inline:auto;text-align:center}
-.quote p{font-size:clamp(1.5rem,3.2vw,2.6rem);line-height:1.28;font-style:italic}
+/* Puvodne 26ch/2.6rem bylo navrzeno na kratky jednoradkovy citat.
+   Realne reference maji 4-5 vet a v nemcine dlouha slozena slova -
+   uzky sloupec pri velkem pismu zpusoboval skutecny pretok textu
+   (schovany pod overflow-x:hidden na body, tedy neviditelny, ale
+   text byl oriznuty). Sirsi sloupec + mensi pismo = citelny odstavec
+   bez rizika pretoku v zadnem ze ctyr jazyku. */
+.quote{position:relative;max-width:min(760px,88vw);margin-inline:auto;text-align:center}
+.quote p{font-size:clamp(1.15rem,2.05vw,1.62rem);line-height:1.5;font-style:italic;overflow-wrap:break-word}
 .quote footer{margin-top:2em;display:flex;flex-direction:column;gap:.4em}
 .quote footer b{font-size:.86rem;font-weight:600;letter-spacing:.06em}
 .quote footer span{font-size:.72rem;letter-spacing:.13em;text-transform:uppercase;color:var(--txt-l-2)}
@@ -350,11 +356,10 @@ button{background:none;border:0;cursor:pointer}
 
 /* ═══════════ 05 · REFERENCE ═══════════ */
 .refs{background:var(--bone-2);padding:var(--sec) 0}
-.refs__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(24px,2.6vw,44px)}
+.refs__grid{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(28px,3.4vw,56px) clamp(24px,2.6vw,44px)}
 .ref{position:relative;padding-top:clamp(24px,2.6vw,38px);border-top:2px solid var(--ink)}
-.ref:nth-child(2){margin-top:clamp(0px,4vw,60px)}
-.ref:nth-child(3){margin-top:clamp(0px,8vw,116px)}
-.ref p{font-size:clamp(1.05rem,1.6vw,1.32rem);line-height:1.45;font-style:italic}
+.ref:nth-child(2n){margin-top:clamp(0px,5vw,72px)}
+.ref p{font-size:clamp(1.05rem,1.6vw,1.32rem);line-height:1.45;font-style:italic;overflow-wrap:break-word}
 .ref footer{margin-top:1.6em;display:flex;flex-direction:column;gap:.35em}
 .ref footer b{font-size:.86rem;font-weight:600}
 .ref footer span{font-size:.68rem;letter-spacing:.13em;text-transform:uppercase;color:var(--txt-d-2)}
