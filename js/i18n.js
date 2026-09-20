@@ -53,6 +53,9 @@ cs: {
   'svc.6.t': 'Dlažba, terasy a okolí domu',
   'svc.6.d': 'Zámková dlažba, chodníky, terasy, přístřešky a venkovní kuchyně. Ta část stavby, kterou klient vidí každý den — proto ji neděláme naposled a ve spěchu.',
   'svc.6.g1': 'zámková dlažba', 'svc.6.g2': 'terasy', 'svc.6.g3': 'chodníky', 'svc.6.g4': 'přístřešky',
+  'svc.7.t': 'Vyzdívky',
+  'svc.7.d': 'Zdění nosných i nenosných zdí z cihel, tvárnic nebo pórobetonu — od základů po štíty. Rovné rohy a přesná geometrie, na kterou pak zedník i fasádník navazují bez zbytečného vyrovnávání.',
+  'svc.7.g1': 'nosné zdivo', 'svc.7.g2': 'příčky', 'svc.7.g3': 'cihly a tvárnice', 'svc.7.g4': 'štíty a komíny',
 
   'chip.1': 'Kompletní rekonstrukce bytů a domů', 'chip.2': 'Sádrokartonářské práce',
   'chip.3': 'Malování a štukování', 'chip.4': 'Rekonstrukce koupelen a WC',
@@ -61,6 +64,7 @@ cs: {
   'chip.9': 'Výkopové a zemní práce', 'chip.10': 'Kanalizace a vodovodní přípojky',
   'chip.11': 'Základové desky a betonáž', 'chip.12': 'Dokončovací stavební práce',
   'chip.13': 'Vyklízení a odvoz materiálu', 'chip.14': 'Klempířské prvky',
+  'chip.15': 'Vyzdívky',
 
   'rev1.text': 'Potřeboval jsem vykopat základy a přípojky na pozemku, terén tam není vůbec jednoduchý – hodně kamení a svah. Kluci přijeli s technikou přesně v domluvený den, práci odhadli reálně a nakonec i dodrželi termín, což se dneska bohužel nestává vždycky. Všechno bylo uklizené, přebytečnou zeminu odvezli sami, nemusel jsem se o nic starat. Můžu jen doporučit.',
   'rev1.name': 'Stando', 'rev1.meta': 'Výkopové práce',
@@ -85,6 +89,9 @@ cs: {
   'g.7.t': 'Historický objekt', 'g.7.s': 'sanace zdiva', 'g.7.cap': 'Sanace historického kamenného a cihelného zdiva',
   'g.8.t': 'Venkovní kuchyně', 'g.8.s': 'terasa · přístřešek', 'g.8.cap': 'Venkovní kuchyně pod krytou terasou',
   'g.9.t': 'Bungalov na klíč', 'g.9.s': 'od základové desky po dlažbu', 'g.9.cap': 'Bungalov na klíč — od základové desky po dlažbu',
+  'g.10.t': 'Rodinný dům po vyzdívce', 'g.10.s': 'Ústecký kraj', 'g.10.cap': 'Dokončený rodinný dům — vyzdívka, fasáda a přístřešek',
+  'g.11.t': 'Zadní trakt domu', 'g.11.s': 'terasa · zahrada', 'g.11.cap': 'Zadní trakt domu s krytou terasou a upravenou zahradou',
+  'g.12.t': 'Přístřešek pro auta', 'g.12.s': 'příjezdová cesta', 'g.12.cap': 'Zastřešené stání a příjezdová cesta',
 
   'why.eyebrow': '04 — Proč my',
   'why.h2': 'Šest důvodů,<br>proč se lidé<br><em>vracejí.</em>',
@@ -178,6 +185,9 @@ uk: {
   'svc.6.t': 'Бруківка, тераси та благоустрій',
   'svc.6.d': 'Бруківка, доріжки, тераси, навіси та літні кухні. Та частина будівництва, яку замовник бачить щодня — тому ми не робимо її наостанок і поспіхом.',
   'svc.6.g1': 'бруківка', 'svc.6.g2': 'тераси', 'svc.6.g3': 'доріжки', 'svc.6.g4': 'навіси',
+  'svc.7.t': 'Мурування',
+  'svc.7.d': 'Мурування несучих і ненесучих стін з цегли, блоків або газобетону — від фундаменту до фронтонів. Рівні кути та точна геометрія, на яку потім спираються штукатур і фасадник без зайвого вирівнювання.',
+  'svc.7.g1': 'несучі стіни', 'svc.7.g2': 'перегородки', 'svc.7.g3': 'цегла та блоки', 'svc.7.g4': 'фронтони й димарі',
 
   'chip.1': 'Повна реконструкція квартир і будинків', 'chip.2': 'Гіпсокартонні роботи',
   'chip.3': 'Фарбування та шпаклювання', 'chip.4': 'Реконструкція ванних кімнат і туалетів',
@@ -186,6 +196,7 @@ uk: {
   'chip.9': 'Земляні та викопні роботи', 'chip.10': 'Каналізація та водопровідні підключення',
   'chip.11': 'Фундаментні плити та бетонні роботи', 'chip.12': 'Оздоблювальні роботи',
   'chip.13': 'Вивезення сміття та матеріалів', 'chip.14': 'Бляхарські елементи',
+  'chip.15': 'Мурування',
 
   'rev1.text': 'Потрібно було викопати фундамент і підключення на ділянці, а ґрунт там зовсім не простий — багато каміння і схил. Хлопці приїхали з технікою точно в домовлений день, реально оцінили обсяг роботи і зрештою дотримали термін, що сьогодні, на жаль, буває не завжди. Все прибрали, зайвий ґрунт вивезли самі, мені не довелося ні про що турбуватися. Можу тільки порекомендувати.',
   'rev1.name': 'Stando', 'rev1.meta': 'Земляні та викопні роботи',
@@ -210,6 +221,9 @@ uk: {
   'g.7.t': 'Історичний об’єкт', 'g.7.s': 'санація кладки', 'g.7.cap': 'Санація історичної кам’яної та цегляної кладки',
   'g.8.t': 'Літня кухня', 'g.8.s': 'тераса · навіс', 'g.8.cap': 'Літня кухня під критою терасою',
   'g.9.t': 'Бунгало під ключ', 'g.9.s': 'від фундаментної плити до бруківки', 'g.9.cap': 'Бунгало під ключ — від фундаментної плити до бруківки',
+  'g.10.t': 'Будинок після мурування', 'g.10.s': 'Устецький край', 'g.10.cap': 'Завершений будинок — мурування, фасад і навіс',
+  'g.11.t': 'Задня частина будинку', 'g.11.s': 'тераса · сад', 'g.11.cap': 'Задня частина будинку з критою терасою та впорядкованим садом',
+  'g.12.t': 'Навіс для авто', 'g.12.s': 'під’їзна доріжка', 'g.12.cap': 'Криті стоянкові місця та під’їзна доріжка',
 
   'why.eyebrow': '04 — Чому ми',
   'why.h2': 'Шість причин,<br>чому до нас<br><em>повертаються.</em>',
@@ -303,6 +317,9 @@ ru: {
   'svc.6.t': 'Брусчатка, террасы и благоустройство',
   'svc.6.d': 'Брусчатка, дорожки, террасы, навесы и летние кухни. Та часть стройки, которую заказчик видит каждый день — поэтому мы не делаем её напоследок и второпях.',
   'svc.6.g1': 'брусчатка', 'svc.6.g2': 'террасы', 'svc.6.g3': 'дорожки', 'svc.6.g4': 'навесы',
+  'svc.7.t': 'Кладка стен',
+  'svc.7.d': 'Кладка несущих и ненесущих стен из кирпича, блоков или газобетона — от фундамента до фронтонов. Ровные углы и точная геометрия, на которую потом опираются штукатур и фасадчик без лишнего выравнивания.',
+  'svc.7.g1': 'несущие стены', 'svc.7.g2': 'перегородки', 'svc.7.g3': 'кирпич и блоки', 'svc.7.g4': 'фронтоны и дымоходы',
 
   'chip.1': 'Полная реконструкция квартир и домов', 'chip.2': 'Гипсокартонные работы',
   'chip.3': 'Покраска и шпаклёвка', 'chip.4': 'Реконструкция ванных и туалетов',
@@ -311,6 +328,7 @@ ru: {
   'chip.9': 'Земляные и выкопные работы', 'chip.10': 'Канализация и водопроводные подключения',
   'chip.11': 'Фундаментные плиты и бетонные работы', 'chip.12': 'Отделочные работы',
   'chip.13': 'Вывоз мусора и материалов', 'chip.14': 'Жестяные элементы',
+  'chip.15': 'Кладка стен',
 
   'rev1.text': 'Нужно было выкопать фундамент и подключения на участке, а грунт там совсем не простой — много камней и уклон. Ребята приехали с техникой точно в оговорённый день, реально оценили объём работы и в итоге уложились в срок, что сегодня, к сожалению, бывает не всегда. Всё убрали, лишний грунт вывезли сами, мне не пришлось ни о чём заботиться. Могу только порекомендовать.',
   'rev1.name': 'Stando', 'rev1.meta': 'Земляные работы',
@@ -335,6 +353,9 @@ ru: {
   'g.7.t': 'Исторический объект', 'g.7.s': 'санация кладки', 'g.7.cap': 'Санация исторической каменной и кирпичной кладки',
   'g.8.t': 'Летняя кухня', 'g.8.s': 'терраса · навес', 'g.8.cap': 'Летняя кухня под крытой террасой',
   'g.9.t': 'Бунгало под ключ', 'g.9.s': 'от фундаментной плиты до брусчатки', 'g.9.cap': 'Бунгало под ключ — от фундаментной плиты до брусчатки',
+  'g.10.t': 'Дом после кладки', 'g.10.s': 'Устецкий край', 'g.10.cap': 'Завершённый дом — кладка стен, фасад и навес',
+  'g.11.t': 'Задняя часть дома', 'g.11.s': 'терраса · сад', 'g.11.cap': 'Задняя часть дома с крытой террасой и благоустроенным садом',
+  'g.12.t': 'Навес для авто', 'g.12.s': 'подъездная дорога', 'g.12.cap': 'Крытые парковочные места и подъездная дорога',
 
   'why.eyebrow': '04 — Почему мы',
   'why.h2': 'Шесть причин,<br>почему к нам<br><em>возвращаются.</em>',
@@ -428,6 +449,9 @@ de: {
   'svc.6.t': 'Pflaster, Terrassen und Außenanlagen',
   'svc.6.d': 'Verbundpflaster, Gehwege, Terrassen, Überdachungen und Außenküchen. Der Teil des Baus, den der Kunde jeden Tag sieht — deshalb machen wir ihn nicht zuletzt und in Eile.',
   'svc.6.g1': 'Verbundpflaster', 'svc.6.g2': 'Terrassen', 'svc.6.g3': 'Gehwege', 'svc.6.g4': 'Überdachungen',
+  'svc.7.t': 'Mauerwerk',
+  'svc.7.d': 'Mauern tragender und nichttragender Wände aus Ziegeln, Steinen oder Porenbeton — vom Fundament bis zum Giebel. Gerade Ecken und präzise Geometrie, auf der Verputzer und Fassadenbauer anschließend ohne zusätzliches Ausgleichen aufbauen.',
+  'svc.7.g1': 'tragende Wände', 'svc.7.g2': 'Zwischenwände', 'svc.7.g3': 'Ziegel und Steine', 'svc.7.g4': 'Giebel und Schornsteine',
 
   'chip.1': 'Komplettsanierung von Wohnungen und Häusern', 'chip.2': 'Trockenbauarbeiten',
   'chip.3': 'Anstrich und Verputz', 'chip.4': 'Sanierung von Bädern und WC',
@@ -436,6 +460,7 @@ de: {
   'chip.9': 'Aushub- und Erdarbeiten', 'chip.10': 'Kanal- und Wasseranschlüsse',
   'chip.11': 'Bodenplatten und Betonarbeiten', 'chip.12': 'Ausbau- und Endarbeiten',
   'chip.13': 'Entrümpelung und Materialabtransport', 'chip.14': 'Spenglerelemente',
+  'chip.15': 'Mauerwerk',
 
   'rev1.text': 'Ich brauchte Aushub für Fundamente und Hausanschlüsse auf dem Grundstück, und der Untergrund dort ist alles andere als einfach – viele Steine und ein Hang. Die Jungs kamen mit der Technik genau am vereinbarten Tag, haben den Aufwand realistisch eingeschätzt und am Ende auch den Termin gehalten, was heute leider nicht immer selbstverständlich ist. Alles war sauber aufgeräumt, den überschüssigen Aushub haben sie selbst abtransportiert, ich musste mich um nichts kümmern. Kann ich nur empfehlen.',
   'rev1.name': 'Stando', 'rev1.meta': 'Aushubarbeiten',
@@ -460,6 +485,9 @@ de: {
   'g.7.t': 'Historisches Objekt', 'g.7.s': 'Mauerwerkssanierung', 'g.7.cap': 'Sanierung von historischem Natur- und Ziegelmauerwerk',
   'g.8.t': 'Außenküche', 'g.8.s': 'Terrasse · Überdachung', 'g.8.cap': 'Außenküche unter überdachter Terrasse',
   'g.9.t': 'Bungalow schlüsselfertig', 'g.9.s': 'von der Bodenplatte bis zum Pflaster', 'g.9.cap': 'Bungalow schlüsselfertig — von der Bodenplatte bis zum Pflaster',
+  'g.10.t': 'Haus nach dem Mauern', 'g.10.s': 'Region Ústí', 'g.10.cap': 'Fertiges Einfamilienhaus — Mauerwerk, Fassade und Carport',
+  'g.11.t': 'Rückseite des Hauses', 'g.11.s': 'Terrasse · Garten', 'g.11.cap': 'Rückseite des Hauses mit überdachter Terrasse und gepflegtem Garten',
+  'g.12.t': 'Carport', 'g.12.s': 'Zufahrt', 'g.12.cap': 'Überdachte Stellplätze und Zufahrt',
 
   'why.eyebrow': '04 — Warum wir',
   'why.h2': 'Sechs Gründe,<br>warum Kunden<br><em>wiederkommen.</em>',
