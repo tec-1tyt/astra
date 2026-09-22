@@ -117,7 +117,7 @@
 
     targets.forEach(function (el) {
       var sib = el.parentElement ? Array.prototype.indexOf.call(el.parentElement.children, el) : 0;
-      el.style.transitionDelay = Math.min(sib, 5) * 70 + 'ms';
+      el.style.transitionDelay = Math.min(sib, 5) * 40 + 'ms';
       io.observe(el);
     });
   } else {
@@ -136,7 +136,7 @@
         var suf = el.getAttribute('data-suffix') || '';
         var t0 = performance.now();
         var step = function (now) {
-          var p = Math.min((now - t0) / 1400, 1);
+          var p = Math.min((now - t0) / 900, 1);
           var eased = 1 - Math.pow(1 - p, 4);
           el.textContent = Math.round(to * eased) + (p === 1 ? suf : '');
           if (p < 1) requestAnimationFrame(step);
@@ -189,7 +189,7 @@
   var closeLb = function () {
     lb.classList.remove('on');
     document.body.classList.remove('lock');
-    setTimeout(function () { lb.hidden = true; }, 400);
+    setTimeout(function () { lb.hidden = true; }, 280);
   };
 
   shots.forEach(function (fig, i) {
